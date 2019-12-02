@@ -1,0 +1,84 @@
+<#include "minimal_header.html" />
+<style>
+svg {
+        text-align: center;
+        margin: auto;
+        width: 200px;
+        height: 200px;
+}
+
+#icon-stop-circle .stopping {
+    -webkit-animation-name: stopping;
+    animation-name: stopping;
+    -webkit-animation-duration: 5s;
+    animation-duration: 5s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+}
+
+@-webkit-keyframes stopping {
+
+    from,
+    50%,
+    to {
+    opacity: 1;
+    fill: #2655fd;
+    stroke: none;
+    }
+
+    25%,
+    75% {
+    opacity: 0;
+    }
+}
+
+@keyframes stopping {
+
+    from,
+    50%,
+    to {
+    opacity: 1;
+    fill: #2655fd;
+    stroke: none;
+    }
+
+    25%,
+    75% {
+    opacity: 0;
+    }
+}
+</style>
+<section class="ftco-section ftco-no-pt ftc-no-pb mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 py-5 justify-content-center">
+                <div class="text-center ftco-animate fadeInUp ftco-animated">
+                    <div class="steps">
+                        <svg id="icon-stop-circle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="#2a2a31" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <rect class="stopping" x="9" y="9" width="6" height="6"></rect>
+                          </svg>
+                        <h3>#i18n{portal.util.error500.title} <small>Error 500</small></h3>
+                        <p> #i18n{portal.util.error500.text} </p>
+                        <#if error_cause??>
+                            <div class="alert alert-danger">
+                                ${error_cause} 
+                            </div>
+                        </#if>
+                            <p>
+                            <a href="" class="btn btn-lg btn-info">
+                                <i class="fas fa-home"></i> #i18n{portal.util.labelBackHome}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>			
+<#include "minimal_footer.html" />

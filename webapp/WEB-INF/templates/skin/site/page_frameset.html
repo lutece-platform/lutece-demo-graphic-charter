@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<base href="${base_url}">
+<title>${favourite} - ${page_name}</title>
+<meta http-equiv="x-ua-compatible" content="IE=edge" >
+<meta charset="${encoding}">
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="author" content="${meta_author}">
+<meta name="copyright" content="${meta_copyright}">
+<meta name="keywords" content="${meta_keywords}">
+<meta name="description" content="${meta_description}">
+<meta name="generator" content="${meta_generator}">
+<!-- Dublin Core metadatas -->
+<meta name="DC.Creator" content="${meta_author}">
+<meta name="DC.Rights" content="${meta_copyright}">
+<meta name="DC.Subject" content="${meta_keywords}">
+<meta name="DC.Description" content="${meta_description}">
+<!-- Set the viewport width to device width for mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Le style -->
+<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,,500,600,700" rel="stylesheet">
+<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="css/animate.css">
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="css/aos.css">
+<link rel="stylesheet" href="css/ionicons.min.css">
+<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="css/jquery.timepicker.css">
+<link rel="stylesheet" href="css/flaticon.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/page_template_styles.css" >
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="${base_url}favicon.ico">
+<#if isExtendInstalled?? && isExtendInstalled >
+	<#if page_id??>
+		@Extender[${page_id},PAGE,opengraph,{header:true}]@
+	</#if>
+</#if>
+${extend_meta!}
+${plugins_css_links}
+<!-- Included JS Files -->
+<script src="js/jquery/jquery.min.js"></script>
+</head>
+<body>
+ <!-- header -->
+${page_header}
+<!-- end header -->
+${social!}
+<!-- Page Path -->
+${page_path}
+<!-- content -->
+${page_content}
+<!-- content -->
+<#if page_id?? && isExtendInstalled?? && isExtendInstalled>
+	@Extender[${page_id},PAGE,comment]@
+	@Extender[${page_id},PAGE,feedback]@
+</#if>
+<#if display_last_modified?? && display_last_modified >
+	<@row>
+		<@column>
+			<p class="text-right">#i18n{portal.site.site_property.page.lastModified} ${last_modified!} </p>
+		</@column>
+	</@row>
+</#if>
+<!-- container -->
+${page_footer}
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+<#if page_id?? && isExtendInstalled?? && isExtendInstalled >
+	@Extender[${page_id},PAGE,opengraph,{header:false,footer:false}]@
+	@Extender[${page_id},PAGE,hit,{show:true}]@
+	@Extender[${page_id},PAGE,rating,{show:"all"}]@
+	@Extender[${page_id},PAGE,actionbar]@
+	@Extender[${page_id},PAGE,opengraph,{footer:true}]@
+</#if>
+<!-- Le javascript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- <script src="js/jquery-migrate-3.0.1.min.js"></script> -->
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/jquery.timepicker.min.js"></script>
+<script src="js/scrollax.min.js"></script>
+<script src="js/main.js"></script>
+${plugins_javascript_links}
+</body>
+</html>

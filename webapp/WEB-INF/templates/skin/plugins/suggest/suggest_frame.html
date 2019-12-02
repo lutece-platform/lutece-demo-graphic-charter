@@ -1,0 +1,269 @@
+<div class="container">
+    <#if unavailability_message?exists>
+      <div class="row">
+        <div class="col-sm-12 py-5 mt-5 justify-content-center">
+          <div class="text-center ftco-animate fadeInUp ftco-animated">
+            <div class="steps">
+					    <h1 class="icon mb-4 d-flex justify-content-center align-items-center bg-warning">
+                <i class="icon-hourglass-o"></i>
+              </h1>
+					    <h2>${unavailability_message}</h2>
+            </div>
+          </div>
+        </div>
+			</div>
+    <#else>
+      <#if view?has_content && view == "view_suggest_submit_list">
+      <header class="suggest-frame ftco-animate">
+        <h2 class="heading-section ftco-animate fadeInUp ftco-animated">${label_suggest!}</h2>
+      </header>
+      <#if header_suggest?has_content>
+        <section class="ftco-animate">
+          <div class="container">
+            <div class="heading-section ftco-animate fadeInUp ftco-animated py-5">
+              ${header_suggest}
+            </div>
+          </div>
+        </section>
+      </#if>
+      </#if>
+      <#if view?has_content && view !="view_suggest_submit_list" >
+        <div id="backlink" class="ftco-animate">
+          <a class="btn btn-secondary my-3" href="jsp/site/Portal.jsp?page=suggest&id_suggest=${id_suggest}&action=view_suggest_submit_list" target="_top">
+            <i class="fas fa-chevron-left"></i>  #i18n{suggest.suggestFrame.backToList}
+          </a>
+        </div>
+      <#else>
+        <div id="proposal" class="ftco-animate">
+          <a class="btn btn-lg btn-primary" href="jsp/site/Portal.jsp?page=suggest&id_suggest=${id_suggest}&action=create_suggest_submit" target="_top">
+            <i class="fas fa-plus"></i> #i18n{suggest.suggestFrame.labelProposal}
+          </a>
+        </div>     
+      </#if>
+      <#if isExtendInstalled?? && isExtendInstalled && view?has_content && view != "view_suggest_submit" >
+        @Extender[${id_suggest},SUGGEST_SUGGEST_TYPE,opengraph,{header:false,footer:false}]@
+        @ExtenderParameter[${id_suggest},SUGGEST_SUGGEST_TYPE,opengraph]@
+      </#if>
+      <section class="row">
+        <div class="col-md-8 ftco-animate">
+          ${content_suggest}
+        </div>
+        <#if view?has_content && view =="view_suggest_submit_list"></#if>
+          <div class="col-md-4 sidebar ftco-animate">
+            <div class="sidebar-box ftco-animate"> 
+                <a class="sr-only">#i18n{suggest.suggestFrame.buttonSorter}</a>
+                <#if id_suggest_submit_sort?string==""><#assign id_suggest_submit_sort="1"></#if>
+                <select id="sort-select" class="custom-select custom-select-sm">
+                   <#list list_suggest_submit_sort as item >
+                    <option value="${item.code}" <#if item.code=id_suggest_submit_sort?string>selected</#if>>#i18n{suggest.suggestFrame.buttonSorter} <#if item.name?trim !="" >${item.name} </#if></option>
+                    </#list>
+                </select>
+            </div>        
+            <div class="sidebar-box ftco-animate">     
+              <form class="search-form" name="search" id="search" method="post" action="jsp/site/Portal.jsp?page=suggest">
+                <input name="action" value="view_suggest_submit_list" type="hidden">
+                <input name="id_suggest" value="${id_suggest}" type="hidden">
+                <input type="hidden" name="page" value="search">
+                <div class="form-group">
+                  <div class="icon">
+                    <span class="icon-search"></span>
+                  </div>
+                  <input type="text" class="form-control" name="query" id="query" placeholder="#i18n{suggest.suggestFrame.altSearch}" value="<#if query?exists>${query}</#if>">
+                </div>
+              </form>   
+            </div>
+            <div class="sidebar-box ftco-animate">
+              <div class="categories">
+                <h3>#i18n{suggest.suggestFrame.labelCategories}</h3>
+                <ul class="list-unstyled">
+                <#if show_category_block>
+                  <#if list_categories_suggest?has_content>
+                    <#list list_categories_suggest as suggest_categories>
+                      <li class="d-flex justify-content-between">
+                        <a href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_filter_category=${suggest_categories.idCategory}&amp;action=view_suggest_submit_list">
+                          ${suggest_categories.title}  
+                        </a>
+                        <#if id_filter_category==suggest_categories.idCategory && id_filter_category &gt; 0>
+                          <a title="#i18n{suggest.suggestFrame.labelRemoveCategoryFilterTitle}"  href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_filter_category=-1&amp;action=view_suggest_submit_list">
+                            <i class="fas fa-minus-circle"></i>
+                          </a>
+                        </#if>
+                      </li>
+                    </#list>
+                  </#if>
+                </#if>
+                </ul>                                    
+              </div>
+            </div>
+            <#if type_selected??>
+              <div class="sidebar-box ftco-animate">
+                <div class="alert alert-danger">
+                  <a class="btn btn-danger btn-mini" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_filter_type=-1&amp;action=view_suggest_submit_list">
+                    <i class="fa fa-remove"></i>
+                  </a>
+                  <span class="label label-inverse" style="background-color:${type_selected.color!};">
+                    ${type_selected.name}
+                  </span>
+                </div>
+              </div>
+            </#if>
+            <#if show_top_score_block>
+              <#if list_top_popularity_suggest?has_content>
+                <div class="sidebar-box ftco-animate">
+                  <h3>#i18n{suggest.suggestFrame.labelTopScore}</h3>
+                  <ul class="list-unstyled">
+                    <#list list_top_popularity_suggest as suggest_popularities>
+                      <li>
+                        <a href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;&amp;id_suggest_submit=${suggest_popularities.idSuggestSubmit}&amp;action=view_suggest_submit">
+                        <#if suggest_popularities.suggestSubmitTitle?exists>
+                          <#if number_shown_characters?exists&&suggest_popularities.suggestSubmitTitle?length &gt;number_shown_characters>
+                            <#if suggest_popularities.suggestSubmitTitle?contains("resource_type")>
+                              #i18n{suggest.suggestFrame.suggestsubmit.image} &nbsp; ${suggest_popularities.idSuggestSubmit}
+                            <#else>
+                             ${suggest_popularities.suggestSubmitTitle?substring(0,number_shown_characters)}...
+                            </#if>
+                          <#else>
+                            ${suggest_popularities.suggestSubmitTitle}
+                          </#if>
+                        </#if>
+                        </a>
+                      </li>
+                    </#list>
+                  </ul>
+                </div>
+              </#if>
+            </#if>
+            <#if authorized_comment && show_top_comment_block>
+              <#if list_top_comment_suggest?has_content> 
+                <div class="sidebar-box ftco-animate">
+                  <h3>#i18n{suggest.suggestFrame.labelTopComment}</h3>
+                  <#list list_top_comment_suggest as suggest_top_comment>
+                    <a  href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;&amp;id_suggest_submit=${suggest_top_comment.idSuggestSubmit}&amp;action=view_suggest_submit">
+                      <#if suggest_top_comment.suggestSubmitTitle?exists>
+                        <#if number_shown_characters?exists&&suggest_top_comment.suggestSubmitTitle?length &gt;number_shown_characters>
+                          ${suggest_top_comment.suggestSubmitTitle?substring(0,number_shown_characters)}...
+                        <#else>
+                          ${suggest_top_comment.suggestSubmitTitle}
+                        </#if>
+                      </#if>
+                    </a>
+                  </#list>
+                </div>
+              </#if>
+            </#if>
+            <div class="sidebar-box">
+              <#if lutece_user_connected?? && user_subscribed??>
+                <#if id_filter_category==-1>
+                  <#if user_subscribed>
+                    <a class="btn btn-danger" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;action=unsubscribe_suggest" title="#i18n{suggest.suggestListSubmit.unsubscribeSuggestHelp}">
+                      <i class="fas fa-ban"></i> #i18n{suggest.suggestListSubmit.unsubscribeSuggest}
+                    </a>
+                  <#else>
+                   <a class="btn btn-primary" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;action=subscribe_suggest" title="#i18n{suggest.suggestListSubmit.subscribeSuggestHelp}">
+                     <i class="far fa-check-circle"></i> #i18n{suggest.suggestListSubmit.subscribeSuggest}
+                  </a>
+                 </#if>
+                <#else>
+                  <#if list_categories_suggest??>
+                    <#list list_categories_suggest as suggest_categories>
+                       <#if id_filter_category==suggest_categories.idCategory>
+                          <#if user_subscribed?? && user_subscribed>
+                            <a class="btn btn-danger" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;action=unsubscribe_suggest&amp;id_filter_category=${suggest_categories.idCategory}" title="#i18n{suggest.suggestListSubmit.unsubscribeCategoryHelp}">
+                              <i class="fas fa-ban"></i> #i18n{suggest.suggestListSubmit.unsubscribeCategory} '${suggest_categories.title}'
+                            </a>
+                          <#else>
+                            <a class="btn btn-primary" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;action=subscribe_suggest&amp;id_filter_category=${suggest_categories.idCategory}" title="#i18n{suggest.suggestListSubmit.subscribeCategoryHelp}">
+                              <i class="far fa-check-circle"></i> #i18n{suggest.suggestListSubmit.subscribeCategory} '${suggest_categories.title}'
+                            </a>
+                          </#if>
+                       </#if>
+                    </#list>
+                  </#if>
+                </#if>
+              </#if>
+            </div>
+            <#if isExtendInstalled?? && isExtendInstalled >
+              <div class="sidebar-box">
+                @Extender[${id_suggest},SUGGEST_SUGGEST_TYPE,opengraph,{footer:true}]@
+              </div>
+            </#if>
+          </div>
+      </#if>
+  </section>
+</div>            
+
+<script>
+function charLimit( obj ){
+  var msg_carSucces="<span class=\"badge badge-success\"><i class=\"fa fa-check\"></i>&nbsp;<strong>";
+  var msg_carFail="<span class=\"badge badge-important\"><i class=\"fa fa-warning\"></i>&nbsp;<b>&nbsp;Limite atteinte ! Vous devez saisir au plus <strong>";
+  var msg_carEnd=" caract&egrave;res</strong></span>";
+  var limit=obj.attr("data-limit");
+
+  if( limit > 0){
+    // Trigger KeyPress on the textarea
+    obj.keypress(function(e) {
+    if( e.charCode >= 48 ){
+      var nCar = obj.val().length
+      obj.next().html( msg_carSucces + eval(nCar + 1) + msg_carEnd);
+      if( nCar >= limit){
+        obj.next().html( msg_carFail + limit + msg_carEnd);
+        return false;
+        }
+      }
+    });
+
+    // Trigger Blur on the textarea
+    obj.blur(function(e) {
+      var txt = obj.val();
+      if( txt.length > limit ){
+        obj.next().html( msg_carFail + limit + msg_carEnd);
+        txt = txt.substr(0,limit);
+        obj.val( txt );
+      }
+    });
+
+    var nKey = false;
+    obj.keyup( function(e) {
+    if ( e.keyCode==46 || e.keyCode==8 ) {
+        var nCar = obj.val().length
+        if (  nCar < limit ){
+          obj.next().html(msg_carSucces + eval(nCar) + msg_carEnd);
+        } else {
+          obj.next().html( msg_carFail + limit + msg_carEnd);
+          txt = txt.substr(0,limit);
+          obj.val( txt );
+      }
+    }
+
+    if( e.keyCode == 86 ){
+      var nCar = obj.val().length
+      obj.next().html(msg_carSucces + eval(nCar) + msg_carEnd);
+      if( nCar >= limit){
+        obj.next().html( msg_carFail + limit + msg_carEnd);
+        return false;
+        }
+      }
+    });
+  }
+};
+
+$( function(){
+  $("#sort-select").change(function(){
+    var selectedItem = $(this).children("option:selected").val(),
+        urlSort = 'jsp/site/Portal.jsp?page=suggest&id_suggest=${id_suggest}&id_suggest_submit_sort=' + selectedItem;
+    window.location.replace( urlSort );
+  });
+
+  $("textarea").each( function(){
+    // Trigger the textarea
+    charLimit( $(this) );
+  });
+
+  $("#t-o-u").toggle();
+
+  $("#btn-tou").click( function(){
+    $("#t-o-u").toggle();
+    return false;
+  });
+});
+</script>

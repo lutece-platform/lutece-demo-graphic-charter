@@ -1,0 +1,78 @@
+<footer class="ftco-footer ftco-bg-dark ftco-section" role="contentinfo">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4 bg-primary p-4">
+            <h2 class="ftco-heading-2">LUTECE</h2>
+            <p>Keep in touch, contribute and more</p>
+            <ul class="ftco-footer-social list-unstyled mb-0">
+              <li class="ftco-animate"><a href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Flutece-platform.github.io%2F&ref_src=twsrc%5Etfw&region=follow_link&screen_name=lutecenews&tw_p=followbutton" target="_blank"><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="https://www.linkedin.com/groups/Lutece-3925974" target="_blank"><span class="icon-linkedin"></span></a></li>
+              <li class="ftco-animate"><a href="https://www.instagram.com/lutece.paris/" target="_blank"><span class="icon-instagram"></span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4 ml-md-5">
+            <h2 class="ftco-heading-2">Unseful Links</h2>
+            <ul class="list-unstyled">
+              <li><a href="https://github.com/lutece-platform/" target="_blank" class="py-2 d-block">Github</a></li>
+              <li><a href="https://hub.docker.com/u/lutece/" target="_blank" class="py-2 d-block">Docker</a></li>
+              <li><a href="http://dev.lutece.paris.fr/" target="_blank" class="py-2 d-block">Documentation</a></li>
+              <li><a href="http://dev.lutece.paris.fr/site-demo/" target="_blank" class="py-2 d-block">Demo</a></li>
+              <li><a href="https://www.ow2.org/" target="_blank" class="py-2 d-block">OW2 Project</a></li>
+              <li><a href="https://www.paris.fr/" target="_blank" class="py-2 d-block">City of Paris</a></li>
+    
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+           <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Navigational</h2>
+            <ul class="list-unstyled">
+                <li><a class="py-2 d-block" href="jsp/site/Portal.jsp">#i18n{portal.site.page_home.label}</a></li>
+                <li><a class="py-2 d-block"href="jsp/site/Portal.jsp?page=map">#i18n{portal.site.site_map.pathLabel}</a></li>
+                <#if isContactInstalled?? && isContactInstalled>
+                    <li><a class="py-2 d-block" href="jsp/site/Portal.jsp?page=contact">#i18n{portal.site.page_menu_tools.xpage.contact}</a></li>
+                </#if>
+                <li>
+                    <a class="py-2 d-block"href="jsp/site/PopupCredits.jsp" title="[#i18n{portal.site.portal_footer.newWindow}] #i18n{portal.site.portal_footer.labelCredits}" target="info_comp">
+                        #i18n{portal.site.portal_footer.labelCredits}
+                    </a>
+                </li>
+                <li>
+                    <a class="py-2 d-block"href="jsp/site/PopupLegalInfo.jsp" title="[#i18n{portal.site.portal_footer.newWindow}] #i18n{portal.site.portal_footer.labelInfo}" target="info_comp">
+                        #i18n{portal.site.portal_footer.labelInfo}
+                    </a>
+                </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4"> 
+              <h2 class="ftco-heading-2">Office</h2>
+              <div class="block-23 mb-3">
+                <ul>
+                  <li><span class="icon icon-map-marker"></span><span class="text">Paris, France</span></li>
+                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">lutece@paris.fr</span></a></li>
+                </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+            <p>
+              Powered By 
+              <img src="images/logo.png" height="20" alt="#i18n{portal.site.portal_footer.labelMadeBy}">
+            </p>   
+            <p>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              </p>
+              <p>Free, beautiful, SVG isometric illustrations <i class="icon-camera-retro" aria-hidden="true"></i> by <a href="https://isometric.online/" title="">isometric.online</a></p>
+        </div>
+      </div>
+    </div>
+</footer>

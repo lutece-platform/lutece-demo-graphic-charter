@@ -1,0 +1,26 @@
+<#include "minimal_header.html" />
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 py-5 justify-content-center">
+                <div class="text-center ftco-animate fadeInUp ftco-animated">
+                    <h1>${portal_domain}</h1>
+                    <h2>#i18n{portal.site.popup_legal_info.pageTitle}</h2>
+                    <h3>#i18n{portal.site.popup_legal_info.copyright}</h3>
+                    #dskey{portal.site.site_property.popup_legal_info.copyright.textblock}
+                    <hr>
+                    <p class="lead">#i18n{portal.site.popup_legal_info.privacy}</p>
+                    #dskey{portal.site.site_property.popup_legal_info.privacy.textblock}
+                    <hr>   
+                    <p>
+                        <a class="btn btn-primary btn-lg" href=".">
+                            <i class="fa fa-remove"></i>  #i18n{portal.site.popup_legal_info.close}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<#include "minimal_footer.html" />
+

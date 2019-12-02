@@ -1,0 +1,44 @@
+<div class="site-toolbar" role="toolbar">
+	<@btnGroup>	
+		<@button title='${i18n("portal.site.portletPreview.orderBadgeTooltip",portlet.order)}' color='info' disabled=true />
+	</@btnGroup>
+	<@btnGroup>
+		<#if portlet.status = portlet_status_published>
+			<@tform action='jsp/admin/site/ModifyPortletStatus.jsp' type='inline'>
+				<@input type='hidden' name='portlet_id' value='${portlet.id}' />
+				<@input type='hidden' name='status' value='${portlet_status_unpublished}' />
+				<@button type='submit' title='#i18n{portal.site.portletPreview.buttonSuspend}'buttonIcon='stop fa-fw' color='danger' showTitle=false />
+			</@tform>
+		<#else>
+			<@tform action='jsp/admin/site/ModifyPortletStatus.jsp' type='inline'>
+				<@input type='hidden' name='portlet_id' value='${portlet.id}' />
+				<@input type='hidden' name='status' value='${portlet_status_published}' />
+				<@button type='submit' title='#i18n{portal.site.portletPreview.buttonActivate}' buttonIcon='play fa-fw' showTitle=false />
+			</@tform>
+		</#if>
+	</@btnGroup>
+	
+	<@btnGroup>
+		<@tform action='jsp/admin/DoModifyPortlet.jsp' type='inline' class='pull-left'>
+			<@input type='hidden' name='portlet_id' value='${portlet.id}' />
+			<@button type='submit' title='#i18n{portal.site.portletPreview.buttonModify}' buttonIcon='pencil-alt fa-fw' showTitle=false />
+		</@tform>
+	</@btnGroup>
+	<#if custom_action_list?has_content>
+	<@btnGroup>
+		<#list custom_action_list as custom_action>
+			<@tform action='${custom_action.actionUrl}' params='target="_parent"' type='inline'>
+				<@input type='hidden' name='id_portlet' value='${portlet.id}' />
+				<!-- input type="image" title="#i18n{${custom_action.title}}" alt="#i18n{${custom_action.title}}" src="${custom_action.imageUrl}"  / -->
+				<@button type='submit' title='#i18n{${custom_action.title}}' buttonIcon='globe fa-fw' showTitle=false />
+			</@tform>
+		</#list>
+	</@btnGroup>
+	</#if>
+	<@btnGroup>
+		<@tform action='jsp/admin/site/RemovePortlet.jsp' type='inline'>
+			<@input type='hidden' name='portlet_id' value='${portlet.id}' />
+			<@button type='submit' title='#i18n{portal.site.portletPreview.buttonDelete}' buttonIcon='trash fa-fw' color='danger' showTitle=false />
+		</@tform>
+	</@btnGroup>
+</div>

@@ -1,0 +1,88 @@
+<div id="suggest${suggest_submit.idSuggestSubmit}">
+	<h1 class="mb-3">
+		<#if suggest_submit.suggestSubmitTitle?length &gt;65>${suggest_submit.suggestSubmitTitle?substring(0,60)}... <#else> ${suggest_submit.suggestSubmitTitle} </#if>
+	</h1>
+	<#if suggest_submit.suggestSubmitValue?exists>
+		<div class="suggest-list-content">
+			${suggest_submit.suggestSubmitValue}
+		</div>
+	</#if>
+	<#if  authorized_vote && !suggest_submit.disableVote && suggest_submit.numberScore?exists>
+		<div>
+			<h4>#i18n{suggest.suggestDetail.labelVote}
+			<#if suggest_submit_vote_type?exists>
+				${suggest_submit_vote_type}
+			</#if>
+			<span class="suggest-score">#i18n{suggest.manageSuggestSubmit.rowNumberScore} ${suggest_submit.numberScore}</span>
+		</div>
+	</#if>
+	<p class="suggest-meta">
+			<#if lutece_user?exists>
+				<#if avatar?has_content>
+					<img class="avatar avatar-suggest img-circle" src="${avatar}" alt="avatar provided by gravatar.com" />
+				<#else>
+					<i class="fa fa-user"></i>
+				</#if>
+				<#if lutece_user?exists>
+					${lutece_user!""}
+				<#else>
+					${lutece_user.getUserInfo("user.name.given")} ${lutece_user.getUserInfo("user.name.family")}
+				</#if> |
+			</#if>
+			<i class="fa fa-calendar"></i> ${suggest_submit.dateResponse}
+		</p>
+	<#if isExtendInstalled?? && isExtendInstalled >
+		<div>
+			<h4 class="suggest-socials">#i18n{suggest.suggestDetail.labelShare}
+				@Extender[${suggest_submit.idSuggestSubmit},SUGGEST_SUGGEST_SUBMIT_TYPE,opengraph,{header:false,footer:false}]@
+				@ExtenderParameter[${suggest_submit.idSuggestSubmit},SUGGEST_SUGGEST_SUBMIT_TYPE,opengraph]@
+			</h4>
+		</div>
+	</#if>
+	<#if lutece_user_connected??>
+		<div>
+		<#if user_subscribed?? && user_subscribed>
+			<a class="btn btn-block btn-danger" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit.idSuggestSubmit}&amp;action=unsubscribe_suggest#suggest${suggest_submit.idSuggestSubmit}" title="#i18n{suggest.manageSuggestSubmit.unsubscribe}">
+				<i class="fa fa-bell-slash-o"></i> #i18n{suggest.manageSuggestSubmit.unsubscribe}
+			</a>
+		<#else>
+			<a class="btn btn-block btn-primary" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit.idSuggestSubmit}&amp;action=subscribe_suggest#suggest${suggest_submit.idSuggestSubmit}" title="#i18n{suggest.manageSuggestSubmit.subscribe}">
+				<i class="fa fa-bell-o"></i> #i18n{suggest.manageSuggestSubmit.subscribe}
+			</a>
+		</#if>
+		</div>
+	</#if>
+	<#if enable_suggest_reports>
+		<div>
+			<a class="btn btn-primary btn-block" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit.idSuggestSubmit}&amp;action=create_report#suggest${suggest_submit.idSuggestSubmit}">
+				<i class="fa fa-flag"></i> #i18n{suggest.suggestListSubmit.labelReport}
+			</a>
+		</div>
+	</#if>
+	<#if authorized_comment && !suggest_submit.disableComment>
+		<hr>
+		<h2><#if suggest_submit.numberCommentEnable==0>Pas de commentaires<#elseif suggest_submit.numberCommentEnable==1>Commentaire<#else>Commentaires <small>(${suggest_submit.numberCommentEnable} )</small></#if></h2>
+		<form class="form" action="jsp/site/Portal.jsp?page=suggest" method="post" name="form-comment" id="form-comment">
+			<input name="action" value="do_create_comment" type="hidden">
+			<input name="id_suggest" value="${id_suggest}" type="hidden">
+			<input name="id_suggest_submit" value="${suggest_submit.idSuggestSubmit}" type="hidden">
+			<div class="form-group">
+				<label>Laisser un commentaire</label>
+				<textarea name="comment_value" id="comment_value" class="markitup form-control" rows="2" placeholder="#i18n{suggest.suggestComment.labelAddNewComment}"></textarea>
+			</div>
+			<#if jcaptcha?exists>
+				<div class="form-group">
+					${jcaptcha}
+				</div>
+			</#if>
+			<div class="form-group">
+				<button class="btn btn-primary btn-lg" type="submit" name="submit_comment">
+					<i class="far fa-comment"></i> #i18n{suggest.suggestComment.labelAddNewComment}
+				</button>
+			</div>
+		</form>
+		<#if list_comment?has_content>
+			${list_comment}
+		</#if>
+	</#if>
+</div>

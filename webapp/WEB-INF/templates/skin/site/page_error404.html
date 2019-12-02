@@ -1,0 +1,79 @@
+<#include "minimal_header.html" />
+<style>
+svg {
+        text-align: center;
+        margin: auto;
+        width: 200px;
+        height: 200px;
+}
+
+#icon-compass .meter {
+        -webkit-animation-name: meterturn;
+        animation-name: meterturn;
+        -webkit-animation-duration: 4s;
+        animation-duration: 4s;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-transform-origin: 50% 50%;
+        transform-origin: 50% 50%;
+}
+
+@-webkit-keyframes meterturn {
+        0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+        }
+
+        50% {
+                -webkit-transform: rotate(-90deg);
+                transform: rotate(-90deg);
+        }
+
+        100% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+        }
+}
+
+@keyframes meterturn {
+        0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+        }
+
+        50% {
+                -webkit-transform: rotate(-90deg);
+                transform: rotate(-90deg);
+        }
+
+        100% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+        }
+}
+</style>
+<section class="ftco-section ftco-no-pt ftc-no-pb mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 py-5 justify-content-center">
+                <div class="text-center ftco-animate fadeInUp ftco-animated">
+                    <div class="steps">
+                        <svg id="icon-compass" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47 47">
+                            <circle cx="23.5" cy="23.5" r="22" style="fill:none;stroke:#2a2a31;stroke-miterlimit:10;stroke-width:3px;" />
+                            <polygon class="meter" style="fill:#2655fd;" points="32.83 14.17 28.16 28.16 14.17 32.83 18.84 18.84 32.83 14.17" />
+                        </svg>
+                        <h3 class="my-5">#i18n{portal.util.error404.title} <small>Error 404</small></h3>
+                        <p class="mb-5"> #i18n{portal.util.error404.text} </p>
+                        <p>
+                            <a href="" class="btn btn-lg btn-primary">
+                                <i class="fas fa-home"></i> #i18n{portal.util.labelBackHome}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>			
+<#include "minimal_footer.html" />
+

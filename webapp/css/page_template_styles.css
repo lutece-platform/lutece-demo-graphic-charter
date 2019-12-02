@@ -1,0 +1,48 @@
+/************************************************
+/* SPECIFIC SUGGEST DEMO DEFAULT THEME STYLES   *
+*************************************************/
+
+.ftco-footer-widget li > a{
+	text-transform: capitalize;
+}
+
+.ftco-footer-widget li > a > span{
+	text-transform: none
+}
+
+/* Header Proposal */
+.suggest-frame{
+	position: relative;
+	top: -30px;
+}
+
+.suggest-frame > h2{
+	background-color: rgba(60, 103, 255, 0.8);
+	padding: 15px 30px;
+	color: #fff;
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 3rem;
+	display: inline-block;
+}
+
+.sidebar-box {
+	padding: 0 25px;
+}
+
+.sidebar-box .search-form {
+	background: transparent;
+	padding: 0
+}
+
+.img-badge{
+	width: 18px;
+}
+
+/* Button  */
+#proposal{
+    position: fixed;
+    bottom: 30px;
+    right: 60px;
+    z-index:9999
+}
