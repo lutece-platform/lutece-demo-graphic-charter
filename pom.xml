@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>lutece-site-pom</artifactId>
+        <groupId>fr.paris.lutece.tools</groupId>
+        <version>2.0.5</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fr.paris.lutece</groupId>
+    <artifactId>site-theme-lutece-demo</artifactId>
+    <packaging>lutece-site</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>lutece Demo site theme</name>
+    <repositories>
+        <repository>
+            <id>luteceSnapshot</id>
+            <name>luteceSnapshot</name>
+            <url>http://dev.lutece.paris.fr/snapshot_repository</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>lutece</id>
+            <name>luteceRepository</name>
+            <url>http://dev.lutece.paris.fr/maven_repository</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+	<properties>
+        <componentName>Theme Demo Suggest</componentName>
+        <jiraProjectName>SUGGESTDEM</jiraProjectName>
+        <jiraComponentId>15732</jiraComponentId>
+        <lutece.plugin.version>4.0.2-SNAPSHOT</lutece.plugin.version>
+        <maven-lutece-plugin.version>4.0.2-SNAPSHOT</maven-lutece-plugin.version>
+    </properties>
+</project>
