@@ -11,24 +11,46 @@
     <packaging>lutece-site</packaging>
     <version>1.0.0-SNAPSHOT</version>
     <name>lutece Demo site theme</name>
+	 <scm>
+        <connection>scm:git:https://github.com/lutece-platform/lutece-demo-graphic-charter.git</connection>
+        <developerConnection>scm:git:https://github.com/lutece-platform/lutece-demo-graphic-charter.git</developerConnection>
+        <url>https://github.com/lutece-platform/lutece-demo-graphic-charter.git</url>
+		<tag>HEAD</tag>
+	</scm>
     <repositories>
         <repository>
-            <id>luteceSnapshot</id>
-            <name>luteceSnapshot</name>
-            <url>http://dev.lutece.paris.fr/snapshot_repository</url>
-            <snapshots>
+            <releases>
                 <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>lutece</id>
-            <name>luteceRepository</name>
-            <url>http://dev.lutece.paris.fr/maven_repository</url>
+            </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+            <id>lutece</id>
+            <name>luteceRepository</name>
+            <url>http://dev.lutece.paris.fr/maven_repository</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>luteceSnapshot</id>
+            <name>luteceSnapshot</name>
+            <url>http://dev.lutece.paris.fr/snapshot_repository</url>
         </repository>
     </repositories>
+	<pluginRepositories>
+        <pluginRepository>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>luteceSnapshot</id>
+            <name>luteceSnapshot</name>
+            <url>http://${serverUrl}/snapshot_repository</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <dependencies>
+	</dependencies>	
 	<properties>
         <componentName>Theme Demo Suggest</componentName>
         <jiraProjectName>SUGGESTDEM</jiraProjectName>
