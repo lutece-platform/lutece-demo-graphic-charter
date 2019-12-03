@@ -53,9 +53,9 @@
             <div class="sidebar-box ftco-animate"> 
                 <a class="sr-only">#i18n{suggest.suggestFrame.buttonSorter}</a>
                 <#if id_suggest_submit_sort?string==""><#assign id_suggest_submit_sort="1"></#if>
-                <select id="sort-select" class="custom-select custom-select-sm">
-                   <#list list_suggest_submit_sort as item >
-                    <option value="${item.code}" <#if item.code=id_suggest_submit_sort?string>selected</#if>>#i18n{suggest.suggestFrame.buttonSorter} <#if item.name?trim !="" >${item.name} </#if></option>
+                <select id="sort-select" class="custom-select">
+                    <#list list_suggest_submit_sort as item >
+                      <option value="${item.code}" <#if item.code=id_suggest_submit_sort?string>selected</#if>>#i18n{suggest.suggestFrame.buttonSorter} <#if item.name?trim !="" >${item.name} </#if></option>
                     </#list>
                 </select>
             </div>        
@@ -265,5 +265,9 @@ $( function(){
     $("#t-o-u").toggle();
     return false;
   });
+  
+    // Set Bg Image
+    // $('.hero-wrap.hero-wrap-2').css('background-image','url(image?resource_type=image_suggest&id=)');
+   
 });
 </script>
