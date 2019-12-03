@@ -17,7 +17,7 @@
 }
 
 .suggest-frame > h2{
-	background-color: rgba(60, 103, 255, 0.8);
+	background-color: rgba(60, 103, 255, 0.9);
 	padding: 15px 30px;
 	color: #fff;
 	font-size: 2rem;
@@ -37,6 +37,10 @@
 
 .img-badge{
 	width: 18px;
+}
+
+.card .desc{
+min-height: 12vh;
 }
 
 /* Button  */
