@@ -5,9 +5,9 @@
       <div class="bg-white card mb-4 order-list shadow-sm">
         <div class="p-3">
           <div class="row">
-            <div class="col-sm-4">
+            <div class="col-xs-12 order-2 order-sm-1 col-sm-4 d-flex align-items-center flex-sm-column align-items-sm-start">
             <#if suggest_submit_display.lutece_user?exists> 
-              <a href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&lutece_user_name_filter=${suggest_submit_display.lutece_user!}" title="#i18n{suggest.suggestListSubmit.labelFilterByUserName}">
+              <a class="inline-block" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&lutece_user_name_filter=${suggest_submit_display.lutece_user!}" title="#i18n{suggest.suggestListSubmit.labelFilterByUserName}">
                 <#if suggest_submit_display.avatar?has_content>
                   <img class="mr-4 avatar avatar-suggest rounded-circle" width="64px" src="${suggest_submit_display.avatar}" alt="avatar provided by gravatar.com">
                 <#else>
@@ -15,7 +15,9 @@
                 </#if>
               </a>
             <#else>
-              <img class="mr-4 avatar avatar-suggest rounded-circle" width="64px" src="images/user.svg" alt="">
+              <span class="inline-block">
+                <img class="mr-4 avatar avatar-suggest rounded-circle" width="64px" src="images/user.svg" alt="">
+              </span>
             </#if>
             <div class="text d-flex py-4">
               <div class="mb-3">
@@ -39,10 +41,17 @@
                     <span class="icon-trophy"></span> #i18n{suggest.manageSuggestSubmit.rowNumberScore} ${suggest_submit_display.suggest_submit.numberScore}
                   </p> 
                 </#if>
+                <#if authorized_vote && !suggest_submit_display.suggest_submit.disableVote && suggest_submit_display.suggest_submit.numberScore?exists>
+                  <p class="meta">
+                    <#if suggest_submit_display.suggest_submit_vote_type?exists>
+                      ${suggest_submit_display.suggest_submit_vote_type}
+                    </#if>
+                  </p>
+                </#if>
                 </div>
               </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-xs-12 order-1 order-sm-2 col-sm-8">
               <div class="desc pl-3">
                 <a class="heading text-dark" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit_display.suggest_submit.idSuggestSubmit}&amp;action=view_suggest_submit#suggest${suggest_submit_display.suggest_submit.idSuggestSubmit}">
                 <#if suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList?exists>
@@ -91,27 +100,20 @@
                 </#if>
               </#if>
               <hr>
-              <div class="float-left">
-                <#if authorized_vote && !suggest_submit_display.suggest_submit.disableVote && suggest_submit_display.suggest_submit.numberScore?exists>
-                  <#if suggest_submit_display.suggest_submit_vote_type?exists>
-                    ${suggest_submit_display.suggest_submit_vote_type}
-                  </#if>
-                </#if>
-              </div>
-              <div class="float-right">
+              <div class="d-flex flex-wrap justify-content-end">
                   <#if authorized_comment && !suggest_submit_display.suggest_submit.disableComment>
-                  <a class="btn btn-secondary btn-sm btn-comment" data-form="#comment-form-${suggest_submit_display.suggest_submit.idSuggestSubmit}" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit_display.suggest_submit.idSuggestSubmit}&amp;suggest_comment=1&amp;action=view_suggest_submit#suggest${suggest_submit_display.suggest_submit.idSuggestSubmit}">
+                  <a class="btn btn-secondary btn-sm btn-comment mt-1 mr-1" data-form="#comment-form-${suggest_submit_display.suggest_submit.idSuggestSubmit}" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit_display.suggest_submit.idSuggestSubmit}&amp;suggest_comment=1&amp;action=view_suggest_submit#suggest${suggest_submit_display.suggest_submit.idSuggestSubmit}">
                     <i class="far fa-comment-dots"></i> #i18n{suggest.suggestListSubmit.labelAddComments}
                   </a>
                   </#if>
-                <#if enable_suggest_reports>
-                  <a class="btn btn-warning btn-sm " href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit_display.suggest_submit.idSuggestSubmit}&amp;action=create_report#suggest${suggest_submit_display.suggest_submit.idSuggestSubmit}">
-                    <i class="fa fa-flag"></i> #i18n{suggest.suggestListSubmit.labelReport}
+                  <#if enable_suggest_reports>
+                    <a class="btn btn-warning btn-sm mt-1 mr-1" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit_display.suggest_submit.idSuggestSubmit}&amp;action=create_report#suggest${suggest_submit_display.suggest_submit.idSuggestSubmit}">
+                      <i class="fa fa-flag"></i> #i18n{suggest.suggestListSubmit.labelReport}
+                    </a>
+                  </#if>
+                  <a class="btn btn-primary btn-sm mt-1 mr-1" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit_display.suggest_submit.idSuggestSubmit}&amp;suggest_comment=1&amp;action=view_suggest_submit#suggest${suggest_submit_display.suggest_submit.idSuggestSubmit}">
+                    <i class="icofont-refresh"></i> #i18n{suggest.suggestListSubmit.labelReadMore}
                   </a>
-                </#if>
-                <a class="btn btn-primary btn-sm " href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit_display.suggest_submit.idSuggestSubmit}&amp;suggest_comment=1&amp;action=view_suggest_submit#suggest${suggest_submit_display.suggest_submit.idSuggestSubmit}">
-                  <i class="icofont-refresh"></i> #i18n{suggest.suggestListSubmit.labelReadMore}
-                </a>
               </div>
               <#if authorized_comment && !suggest_submit_display.suggest_submit.disableComment>
               <div id="comment-form-${suggest_submit_display.suggest_submit.idSuggestSubmit}" class="comment-form pt-4">

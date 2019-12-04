@@ -45,11 +45,11 @@
         @ExtenderParameter[${id_suggest},SUGGEST_SUGGEST_TYPE,opengraph]@
       </#if>
       <section class="row">
-        <div class="col-md-8 ftco-animate">
+        <div class="col-xs-6 col-sm-8 ftco-animate">
           ${content_suggest}
         </div>
         <#if view?has_content && view =="view_suggest_submit_list"></#if>
-          <div class="col-md-4 sidebar ftco-animate">
+          <div class="col-xs-6 col-sm-4 sidebar ftco-animate">
             <div class="sidebar-box ftco-animate"> 
                 <a class="sr-only">#i18n{suggest.suggestFrame.buttonSorter}</a>
                 <#if id_suggest_submit_sort?string==""><#assign id_suggest_submit_sort="1"></#if>

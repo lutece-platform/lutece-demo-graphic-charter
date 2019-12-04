@@ -1,6 +1,9 @@
 /************************************************
 /* SPECIFIC SUGGEST DEMO DEFAULT THEME STYLES   *
 *************************************************/
+.ftco-section {
+	overflow: hidden;
+}
 
 .ftco-footer-widget li > a{
 	text-transform: capitalize;
@@ -8,6 +11,22 @@
 
 .ftco-footer-widget li > a > span{
 	text-transform: none
+}
+
+/* Home responsive */
+@media (max-width: 991.98px) {
+	.lutece-section{
+		margin-top: -40vh
+	} 
+	.lutece-section .img-coding{
+		width: 60%
+	} 
+}
+
+@media (max-width: 601px) {
+	.lutece-section{
+		margin-top: -30vh
+	} 
 }
 
 /* Header Proposal */
@@ -26,6 +45,7 @@
 	display: inline-block;
 }
 
+/* List Aside	*/
 .sidebar-box {
 	padding: 0 25px;
 }
@@ -34,6 +54,7 @@
 	background: transparent;
 	padding: 0
 }
+
 
 .img-badge{
 	width: 18px;
@@ -50,3 +71,4 @@ min-height: 12vh;
     right: 60px;
     z-index:9999
 }
+

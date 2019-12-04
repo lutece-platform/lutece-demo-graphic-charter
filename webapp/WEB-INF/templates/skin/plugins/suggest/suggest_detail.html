@@ -40,7 +40,15 @@
 		</#if>
 		</div>
 		<div class="desc align-self-md-center">
-			<h3><#if lutece_user?exists>${lutece_user!""}<#else>${lutece_user.getUserInfo("user.name.given")} ${lutece_user.getUserInfo("user.name.family")}</#if></h3>
+			<#if suggest_submit.lutece_user??>
+				<h3>
+					<#if suggest_submit.lutece_user?exists>
+						${suggest_submit.lutece_user!''}
+					<#else>
+						${suggest_submit.lutece_user.getUserInfo("user.name.given")!} ${suggest_submit.lutece_user.getUserInfo("user.name.family")!}
+					</#if>
+				</h3>
+			</#if>
 			<p class="meta">
 				<span class="icon-calendar"></span> ${suggest_submit.dateResponse}
 			</p>
