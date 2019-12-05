@@ -6,7 +6,7 @@
         <version>2.0.5</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>fr.paris.lutece</groupId>
+    <groupId>fr.paris.lutece.themes</groupId>
     <artifactId>site-theme-lutece-demo</artifactId>
     <packaging>lutece-site</packaging>
     <version>1.0.0-SNAPSHOT</version>
