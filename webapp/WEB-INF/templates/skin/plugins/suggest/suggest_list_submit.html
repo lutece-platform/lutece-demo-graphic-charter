@@ -471,14 +471,14 @@ $( function () {
   <#if ( paginator.pageCurrent - offsetPrev > 1 )>
     <li>
       <a href="${paginator.firstPageLink?xhtml}" title="#i18n{portal.util.labelFirst}">
-        <i class="fa fa-angle-double-left"></i>
+          <i class="fas fa-fast-backward"></i>
       </a>
     </li>
 	</#if>
   <#if ( paginator.pageCurrent > 1 )>
     <li>
       <a href="${paginator.previousPageLink?xhtml}" title="#i18n{portal.util.labelPrevious}">
-        <i class="fa fa-angle-left"></i>
+          <i class="fas fa-backward"></i>
       </a>
     </li>
 	</#if>
@@ -506,13 +506,13 @@ $( function () {
   <#if ( paginator.pageCurrent < paginator.pagesCount )>
     <li>
       <a href="${paginator.nextPageLink?xhtml}" title="#i18n{portal.util.labelNext}">
-        <i class="fa fa-angle-right"></i> 
+          <i class="fas fa-forward"></i>
 		  </a>
     </li>
     <#if ( paginator.pageCurrent + offsetNext < paginator.pagesCount )>
       <li>
         <a href="${paginator.lastPageLink?xhtml}" title="#i18n{portal.util.labelLast}">
-          <i class="fa fa-angle-double-right"></i> 
+          <i class="fas fa-fast-forward"></i>
         </a>
       </li>
 		</#if>
