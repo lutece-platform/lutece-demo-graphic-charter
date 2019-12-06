@@ -48,146 +48,145 @@
         <div class="col-xs-6 col-sm-8 ftco-animate">
           ${content_suggest}
         </div>
-        <#if view?has_content && view =="view_suggest_submit_list"></#if>
-          <div class="col-xs-6 col-sm-4 sidebar ftco-animate">
-            <div class="sidebar-box ftco-animate"> 
-                <a class="sr-only">#i18n{suggest.suggestFrame.buttonSorter}</a>
-                <#if id_suggest_submit_sort?string==""><#assign id_suggest_submit_sort="1"></#if>
-                <select id="sort-select" class="custom-select">
-                    <#list list_suggest_submit_sort as item >
-                      <option value="${item.code}" <#if item.code=id_suggest_submit_sort?string>selected</#if>>#i18n{suggest.suggestFrame.buttonSorter} <#if item.name?trim !="" >${item.name} </#if></option>
-                    </#list>
-                </select>
-            </div>        
-            <div class="sidebar-box ftco-animate">     
-              <form class="search-form" name="search" id="search" method="post" action="jsp/site/Portal.jsp?page=suggest">
-                <input name="action" value="view_suggest_submit_list" type="hidden">
-                <input name="id_suggest" value="${id_suggest}" type="hidden">
-                <input type="hidden" name="page" value="search">
-                <div class="form-group">
-                  <div class="icon">
-                    <span class="icon-search"></span>
-                  </div>
-                  <input type="text" class="form-control" name="query" id="query" placeholder="#i18n{suggest.suggestFrame.altSearch}" value="<#if query?exists>${query}</#if>">
+        <div class="col-xs-6 col-sm-4 sidebar ftco-animate">
+          <div class="sidebar-box ftco-animate"> 
+            <a class="sr-only">#i18n{suggest.suggestFrame.buttonSorter}</a>
+            <#if id_suggest_submit_sort?string==""><#assign id_suggest_submit_sort="1"></#if>
+            <select id="sort-select" class="custom-select">
+              <#list list_suggest_submit_sort as item >
+                <option value="${item.code}" <#if item.code=id_suggest_submit_sort?string>selected</#if>>#i18n{suggest.suggestFrame.buttonSorter} <#if item.name?trim !="" >${item.name} </#if></option>
+              </#list>
+            </select>
+          </div>        
+          <div class="sidebar-box ftco-animate">     
+            <form class="search-form" name="search" id="search" method="post" action="jsp/site/Portal.jsp?page=suggest">
+              <input name="action" value="view_suggest_submit_list" type="hidden">
+              <input name="id_suggest" value="${id_suggest}" type="hidden">
+              <input type="hidden" name="page" value="search">
+              <div class="form-group">
+                <div class="icon">
+                  <span class="icon-search"></span>
                 </div>
-              </form>   
-            </div>
-            <div class="sidebar-box ftco-animate">
-              <div class="categories">
-                <h3>#i18n{suggest.suggestFrame.labelCategories}</h3>
-                <ul class="list-unstyled">
-                <#if show_category_block>
-                  <#if list_categories_suggest?has_content>
-                    <#list list_categories_suggest as suggest_categories>
-                      <li class="d-flex justify-content-between">
-                        <a href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_filter_category=${suggest_categories.idCategory}&amp;action=view_suggest_submit_list">
-                          ${suggest_categories.title}  
+                <input type="text" class="form-control" name="query" id="query" placeholder="#i18n{suggest.suggestFrame.altSearch}" value="<#if query?exists>${query}</#if>">
+              </div>
+            </form>   
+          </div>
+          <div class="sidebar-box ftco-animate">
+            <div class="categories">
+              <h3>#i18n{suggest.suggestFrame.labelCategories}</h3>
+              <ul class="list-unstyled">
+              <#if show_category_block>
+                <#if list_categories_suggest?has_content>
+                  <#list list_categories_suggest as suggest_categories>
+                    <li class="d-flex justify-content-between">
+                      <a href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_filter_category=${suggest_categories.idCategory}&amp;action=view_suggest_submit_list">
+                        ${suggest_categories.title}  
+                      </a>
+                      <#if id_filter_category==suggest_categories.idCategory && id_filter_category &gt; 0>
+                        <a title="#i18n{suggest.suggestFrame.labelRemoveCategoryFilterTitle}"  href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_filter_category=-1&amp;action=view_suggest_submit_list">
+                          <i class="fas fa-minus-circle"></i>
                         </a>
-                        <#if id_filter_category==suggest_categories.idCategory && id_filter_category &gt; 0>
-                          <a title="#i18n{suggest.suggestFrame.labelRemoveCategoryFilterTitle}"  href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_filter_category=-1&amp;action=view_suggest_submit_list">
-                            <i class="fas fa-minus-circle"></i>
-                          </a>
-                        </#if>
-                      </li>
-                    </#list>
-                  </#if>
+                      </#if>
+                    </li>
+                  </#list>
                 </#if>
-                </ul>                                    
+              </#if>
+              </ul>                                    
+            </div>
+          </div>
+          <#if type_selected??>
+            <div class="sidebar-box ftco-animate">
+              <div class="alert alert-danger">
+                <a class="btn btn-danger btn-mini" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_filter_type=-1&amp;action=view_suggest_submit_list">
+                  <i class="fa fa-remove"></i>
+                </a>
+                <span class="label label-inverse" style="background-color:${type_selected.color!};">
+                  ${type_selected.name}
+                </span>
               </div>
             </div>
-            <#if type_selected??>
+          </#if>
+          <#if show_top_score_block>
+            <#if list_top_popularity_suggest?has_content>
               <div class="sidebar-box ftco-animate">
-                <div class="alert alert-danger">
-                  <a class="btn btn-danger btn-mini" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_filter_type=-1&amp;action=view_suggest_submit_list">
-                    <i class="fa fa-remove"></i>
-                  </a>
-                  <span class="label label-inverse" style="background-color:${type_selected.color!};">
-                    ${type_selected.name}
-                  </span>
-                </div>
-              </div>
-            </#if>
-            <#if show_top_score_block>
-              <#if list_top_popularity_suggest?has_content>
-                <div class="sidebar-box ftco-animate">
-                  <h3>#i18n{suggest.suggestFrame.labelTopScore}</h3>
-                  <ul class="list-unstyled">
-                    <#list list_top_popularity_suggest as suggest_popularities>
-                      <li>
-                        <a href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;&amp;id_suggest_submit=${suggest_popularities.idSuggestSubmit}&amp;action=view_suggest_submit">
-                        <#if suggest_popularities.suggestSubmitTitle?exists>
-                          <#if number_shown_characters?exists&&suggest_popularities.suggestSubmitTitle?length &gt;number_shown_characters>
-                            <#if suggest_popularities.suggestSubmitTitle?contains("resource_type")>
-                              #i18n{suggest.suggestFrame.suggestsubmit.image} &nbsp; ${suggest_popularities.idSuggestSubmit}
-                            <#else>
-                             ${suggest_popularities.suggestSubmitTitle?substring(0,number_shown_characters)}...
-                            </#if>
+                <h3>#i18n{suggest.suggestFrame.labelTopScore}</h3>
+                <ul class="list-unstyled">
+                  <#list list_top_popularity_suggest as suggest_popularities>
+                    <li>
+                      <a class="text-primary d-block" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;&amp;id_suggest_submit=${suggest_popularities.idSuggestSubmit}&amp;action=view_suggest_submit">
+                      <#if suggest_popularities.suggestSubmitTitle?exists>
+                        <#if number_shown_characters?exists&&suggest_popularities.suggestSubmitTitle?length &gt;number_shown_characters>
+                          <#if suggest_popularities.suggestSubmitTitle?contains("resource_type")>
+                            #i18n{suggest.suggestFrame.suggestsubmit.image} &nbsp; ${suggest_popularities.idSuggestSubmit}
                           <#else>
-                            ${suggest_popularities.suggestSubmitTitle}
+                            ${suggest_popularities.suggestSubmitTitle?substring(0,number_shown_characters)}...
                           </#if>
-                        </#if>
-                        </a>
-                      </li>
-                    </#list>
-                  </ul>
-                </div>
-              </#if>
-            </#if>
-            <#if authorized_comment && show_top_comment_block>
-              <#if list_top_comment_suggest?has_content> 
-                <div class="sidebar-box ftco-animate">
-                  <h3>#i18n{suggest.suggestFrame.labelTopComment}</h3>
-                  <#list list_top_comment_suggest as suggest_top_comment>
-                    <a  href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;&amp;id_suggest_submit=${suggest_top_comment.idSuggestSubmit}&amp;action=view_suggest_submit">
-                      <#if suggest_top_comment.suggestSubmitTitle?exists>
-                        <#if number_shown_characters?exists&&suggest_top_comment.suggestSubmitTitle?length &gt;number_shown_characters>
-                          ${suggest_top_comment.suggestSubmitTitle?substring(0,number_shown_characters)}...
                         <#else>
-                          ${suggest_top_comment.suggestSubmitTitle}
+                          ${suggest_popularities.suggestSubmitTitle}
                         </#if>
                       </#if>
-                    </a>
+                      </a>
+                    </li>
                   </#list>
-                </div>
-              </#if>
-            </#if>
-            <div class="sidebar-box">
-              <#if lutece_user_connected?? && user_subscribed??>
-                <#if id_filter_category==-1>
-                  <#if user_subscribed>
-                    <a class="btn btn-danger" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;action=unsubscribe_suggest" title="#i18n{suggest.suggestListSubmit.unsubscribeSuggestHelp}">
-                      <i class="fas fa-ban"></i> #i18n{suggest.suggestListSubmit.unsubscribeSuggest}
-                    </a>
-                  <#else>
-                   <a class="btn btn-primary" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;action=subscribe_suggest" title="#i18n{suggest.suggestListSubmit.subscribeSuggestHelp}">
-                     <i class="far fa-check-circle"></i> #i18n{suggest.suggestListSubmit.subscribeSuggest}
-                  </a>
-                 </#if>
-                <#else>
-                  <#if list_categories_suggest??>
-                    <#list list_categories_suggest as suggest_categories>
-                       <#if id_filter_category==suggest_categories.idCategory>
-                          <#if user_subscribed?? && user_subscribed>
-                            <a class="btn btn-danger" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;action=unsubscribe_suggest&amp;id_filter_category=${suggest_categories.idCategory}" title="#i18n{suggest.suggestListSubmit.unsubscribeCategoryHelp}">
-                              <i class="fas fa-ban"></i> #i18n{suggest.suggestListSubmit.unsubscribeCategory} '${suggest_categories.title}'
-                            </a>
-                          <#else>
-                            <a class="btn btn-primary" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;action=subscribe_suggest&amp;id_filter_category=${suggest_categories.idCategory}" title="#i18n{suggest.suggestListSubmit.subscribeCategoryHelp}">
-                              <i class="far fa-check-circle"></i> #i18n{suggest.suggestListSubmit.subscribeCategory} '${suggest_categories.title}'
-                            </a>
-                          </#if>
-                       </#if>
-                    </#list>
-                  </#if>
-                </#if>
-              </#if>
-            </div>
-            <#if isExtendInstalled?? && isExtendInstalled >
-              <div class="sidebar-box">
-                @Extender[${id_suggest},SUGGEST_SUGGEST_TYPE,opengraph,{footer:true}]@
+                </ul>
               </div>
             </#if>
+          </#if>
+          <#if authorized_comment && show_top_comment_block>
+            <#if list_top_comment_suggest?has_content> 
+              <div class="sidebar-box ftco-animate">
+                <h3>#i18n{suggest.suggestFrame.labelTopComment}</h3>
+                <#list list_top_comment_suggest as suggest_top_comment>
+                  <a class="text-primary d-block" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;&amp;id_suggest_submit=${suggest_top_comment.idSuggestSubmit}&amp;action=view_suggest_submit">
+                    <#if suggest_top_comment.suggestSubmitTitle?exists>
+                      <#if number_shown_characters?exists&&suggest_top_comment.suggestSubmitTitle?length &gt;number_shown_characters>
+                        ${suggest_top_comment.suggestSubmitTitle?substring(0,number_shown_characters)}...
+                      <#else>
+                        ${suggest_top_comment.suggestSubmitTitle}
+                      </#if>
+                    </#if>
+                  </a>
+                </#list>
+              </div>
+            </#if>
+          </#if>
+          <div class="sidebar-box">
+            <#if lutece_user_connected?? && user_subscribed??>
+              <#if id_filter_category==-1>
+                <#if user_subscribed>
+                  <a class="btn btn-danger" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;action=unsubscribe_suggest" title="#i18n{suggest.suggestListSubmit.unsubscribeSuggestHelp}">
+                    <i class="fas fa-ban"></i> #i18n{suggest.suggestListSubmit.unsubscribeSuggest}
+                  </a>
+                <#else>
+                  <a class="btn btn-primary" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;action=subscribe_suggest" title="#i18n{suggest.suggestListSubmit.subscribeSuggestHelp}">
+                    <i class="far fa-check-circle"></i> #i18n{suggest.suggestListSubmit.subscribeSuggest}
+                </a>
+                </#if>
+              <#else>
+                <#if list_categories_suggest??>
+                  <#list list_categories_suggest as suggest_categories>
+                      <#if id_filter_category==suggest_categories.idCategory>
+                        <#if user_subscribed?? && user_subscribed>
+                          <a class="btn btn-danger" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;action=unsubscribe_suggest&amp;id_filter_category=${suggest_categories.idCategory}" title="#i18n{suggest.suggestListSubmit.unsubscribeCategoryHelp}">
+                            <i class="fas fa-ban"></i> #i18n{suggest.suggestListSubmit.unsubscribeCategory} '${suggest_categories.title}'
+                          </a>
+                        <#else>
+                          <a class="btn btn-primary" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;action=subscribe_suggest&amp;id_filter_category=${suggest_categories.idCategory}" title="#i18n{suggest.suggestListSubmit.subscribeCategoryHelp}">
+                            <i class="far fa-check-circle"></i> #i18n{suggest.suggestListSubmit.subscribeCategory} '${suggest_categories.title}'
+                          </a>
+                        </#if>
+                      </#if>
+                  </#list>
+                </#if>
+              </#if>
+            </#if>
           </div>
+          <#if isExtendInstalled?? && isExtendInstalled >
+            <div class="sidebar-box">
+              @Extender[${id_suggest},SUGGEST_SUGGEST_TYPE,opengraph,{footer:true}]@
+            </div>
+          </#if>
+        </div>
       </#if>
   </section>
 </div>            

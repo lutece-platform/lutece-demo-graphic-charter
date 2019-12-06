@@ -37,11 +37,9 @@
                   </#if>
                 </p>
                 <#if authorized_vote && !suggest_submit_display.suggest_submit.disableVote && suggest_submit_display.suggest_submit.numberScore?exists>
-                  <p class="meta">
-                    <span class="icon-trophy"></span> #i18n{suggest.manageSuggestSubmit.rowNumberScore} ${suggest_submit_display.suggest_submit.numberScore}
+                  <p class="meta" title="#i18n{suggest.manageSuggestSubmit.rowNumberScore} ">
+                    <span class="icon-heart"></span> ${suggest_submit_display.suggest_submit.numberScore}
                   </p> 
-                </#if>
-                <#if authorized_vote && !suggest_submit_display.suggest_submit.disableVote && suggest_submit_display.suggest_submit.numberScore?exists>
                   <p class="meta">
                     <#if suggest_submit_display.suggest_submit_vote_type?exists>
                       ${suggest_submit_display.suggest_submit_vote_type}
@@ -54,13 +52,14 @@
             <div class="col-xs-12 order-1 order-sm-2 col-sm-8">
               <div class="desc pl-3">
                 <a class="heading text-dark" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit_display.suggest_submit.idSuggestSubmit}&amp;action=view_suggest_submit#suggest${suggest_submit_display.suggest_submit.idSuggestSubmit}">
-                <#if suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList?exists>
+                  <h5>${suggest_submit_display.suggest_submit.suggestSubmitTitle}</h5>
+                  <#if suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList?exists>
                   <#if suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList?length &gt; 500>
-                    ${suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList}
+                  ${suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList}
                   <#else>
-                    ${suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList}
+                  ${suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList}
                   </#if>
-                </#if>
+                  </#if>
                 </a>
                 <p class="text-gray mb-3">
                   <#if suggest_submit_display.suggest_submit.suggestSubmitType?exists>
@@ -77,10 +76,9 @@
               </div>
               <#if authorized_comment && !suggest_submit_display.suggest_submit.disableComment && display_comment_in_list>
                 <#assign nbComments = 1>
-		            
                 <#if suggest_submit_display.suggest_submit.numberCommentEnable &gt; 0 >
-                <hr>
-                <div class="suggest-list-comments">
+                  <hr>
+                  <div class="suggest-list-comments">
                     <#if suggest_submit_display.suggest_submit.numberCommentEnable &gt; 1 >
                       <#assign lblComment>#i18n{suggest.suggestListSubmit.labelPreviewForPlural} ${suggest_submit_display.suggest_submit.numberCommentEnable} #i18n{suggest.suggestListSubmit.labelComments}</#assign>
                     <#else>
@@ -101,42 +99,42 @@
               </#if>
               <hr>
               <div class="d-flex flex-wrap justify-content-end">
-                  <#if authorized_comment && !suggest_submit_display.suggest_submit.disableComment>
+                <#if authorized_comment && !suggest_submit_display.suggest_submit.disableComment>
                   <a class="btn btn-secondary btn-sm btn-comment mt-1 mr-1" data-form="#comment-form-${suggest_submit_display.suggest_submit.idSuggestSubmit}" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit_display.suggest_submit.idSuggestSubmit}&amp;suggest_comment=1&amp;action=view_suggest_submit#suggest${suggest_submit_display.suggest_submit.idSuggestSubmit}">
                     <i class="far fa-comment-dots"></i> #i18n{suggest.suggestListSubmit.labelAddComments}
                   </a>
-                  </#if>
-                  <#if enable_suggest_reports>
+                </#if>
+                <#if enable_suggest_reports>
                     <a class="btn btn-warning btn-sm mt-1 mr-1" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit_display.suggest_submit.idSuggestSubmit}&amp;action=create_report#suggest${suggest_submit_display.suggest_submit.idSuggestSubmit}">
                       <i class="fa fa-flag"></i> #i18n{suggest.suggestListSubmit.labelReport}
                     </a>
-                  </#if>
+                </#if>
                   <a class="btn btn-primary btn-sm mt-1 mr-1" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit_display.suggest_submit.idSuggestSubmit}&amp;suggest_comment=1&amp;action=view_suggest_submit#suggest${suggest_submit_display.suggest_submit.idSuggestSubmit}">
                     <i class="icofont-refresh"></i> #i18n{suggest.suggestListSubmit.labelReadMore}
                   </a>
               </div>
               <#if authorized_comment && !suggest_submit_display.suggest_submit.disableComment>
-              <div id="comment-form-${suggest_submit_display.suggest_submit.idSuggestSubmit}" class="comment-form pt-4">
-                <form class="form mt-4" action="jsp/site/Portal.jsp?page=suggest" method="post" name="form-comment" id="form-comment">
-                  <input name="action" value="do_create_comment" type="hidden">
-                  <input name="id_suggest" value="${id_suggest}" type="hidden">
-                  <input name="id_suggest_submit" value="${suggest_submit_display.suggest_submit.idSuggestSubmit}" type="hidden">
-                  <div class="form-group">
-                    <label for="comment_value" class="sr-only">#i18n{suggest.suggestComment.labelAddNewComment}</label>
-                    <textarea name="comment_value" id="comment_value" class="markitup form-control" rows="2" placeholder="#i18n{suggest.suggestComment.labelAddNewComment}"></textarea>
-                  </div>
-                  <#if jcaptcha?exists>
-                  <div class="form-group">
-                    ${jcaptcha}
-                  </div>
-                  </#if>
-                  <div class="form-group">
-                    <button class="btn btn-primary" type="submit" name="submit_comment">
-                      <i class="far fa-comment"></i> #i18n{suggest.suggestComment.labelAddNewComment}
-                    </button>
-                  </div>
-                </form>
-              </div> 
+                <div id="comment-form-${suggest_submit_display.suggest_submit.idSuggestSubmit}" class="comment-form pt-4">
+                  <form class="form mt-4" action="jsp/site/Portal.jsp?page=suggest" method="post" name="form-comment" id="form-comment">
+                    <input name="action" value="do_create_comment" type="hidden">
+                    <input name="id_suggest" value="${id_suggest}" type="hidden">
+                    <input name="id_suggest_submit" value="${suggest_submit_display.suggest_submit.idSuggestSubmit}" type="hidden">
+                    <div class="form-group">
+                      <label for="comment_value">#i18n{suggest.suggestComment.labelAddNewComment}</label>
+                      <textarea name="comment_value" id="comment_value" class="markitup form-control" rows="2"></textarea>
+                    </div>
+                    <#if jcaptcha?exists>
+                    <div class="form-group">
+                      ${jcaptcha}
+                    </div>
+                    </#if>
+                    <div class="form-group">
+                      <button class="btn btn-primary" type="submit" name="submit_comment">
+                        <i class="far fa-comment"></i> #i18n{suggest.suggestComment.labelAddNewComment}
+                      </button>
+                    </div>
+                  </form>
+                </div> 
               </#if>
             </div>
           </div>
@@ -146,27 +144,298 @@
   </div>
   </#list>
 <#else>
+<style>
+  svg {
+      text-align: center;
+      margin: auto;
+      width: 200px;
+      height: 200px;
+    }
+
+    #icon-notification {
+      -webkit-animation: ring 4s .7s ease-in-out infinite;
+      animation: ring 4s .7s ease-in-out infinite;
+      -webkit-transform-origin: 50% 4px;
+      transform-origin: 50% 4px;
+      
+    }
+
+    @-webkit-keyframes ring {
+      0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+      }
+
+      1% {
+        -webkit-transform: rotate(30deg);
+        transform: rotate(30deg);
+      }
+
+      3% {
+        -webkit-transform: rotate(-28deg);
+        transform: rotate(-28deg);
+      }
+
+      5% {
+        -webkit-transform: rotate(34deg);
+        transform: rotate(34deg);
+      }
+
+      7% {
+        -webkit-transform: rotate(-32deg);
+        transform: rotate(-32deg);
+      }
+
+      9% {
+        -webkit-transform: rotate(30deg);
+        transform: rotate(30deg);
+      }
+
+      11% {
+        -webkit-transform: rotate(-28deg);
+        transform: rotate(-28deg);
+      }
+
+      13% {
+        -webkit-transform: rotate(26deg);
+        transform: rotate(26deg);
+      }
+
+      15% {
+        -webkit-transform: rotate(-24deg);
+        transform: rotate(-24deg);
+      }
+
+      17% {
+        -webkit-transform: rotate(22deg);
+        transform: rotate(22deg);
+      }
+
+      19% {
+        -webkit-transform: rotate(-20deg);
+        transform: rotate(-20deg);
+      }
+
+      21% {
+        -webkit-transform: rotate(18deg);
+        transform: rotate(18deg);
+      }
+
+      23% {
+        -webkit-transform: rotate(-16deg);
+        transform: rotate(-16deg);
+      }
+
+      25% {
+        -webkit-transform: rotate(14deg);
+        transform: rotate(14deg);
+      }
+
+      27% {
+        -webkit-transform: rotate(-12deg);
+        transform: rotate(-12deg);
+      }
+
+      29% {
+        -webkit-transform: rotate(10deg);
+        transform: rotate(10deg);
+      }
+
+      31% {
+        -webkit-transform: rotate(-8deg);
+        transform: rotate(-8deg);
+      }
+
+      33% {
+        -webkit-transform: rotate(6deg);
+        transform: rotate(6deg);
+      }
+
+      35% {
+        -webkit-transform: rotate(-4deg);
+        transform: rotate(-4deg);
+      }
+
+      37% {
+        -webkit-transform: rotate(2deg);
+        transform: rotate(2deg);
+      }
+
+      39% {
+        -webkit-transform: rotate(-1deg);
+        transform: rotate(-1deg);
+      }
+
+      41% {
+        -webkit-transform: rotate(1deg);
+        transform: rotate(1deg);
+      }
+
+      43% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+      }
+
+      100% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+      }
+    }
+
+    @keyframes ring {
+      0% {
+        fill: #2655fd;
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+      }
+
+      1% {
+        -webkit-transform: rotate(30deg);
+        transform: rotate(30deg);
+      }
+
+      3% {
+        -webkit-transform: rotate(-28deg);
+        transform: rotate(-28deg);
+      }
+
+      5% {
+        -webkit-transform: rotate(34deg);
+        transform: rotate(34deg);
+      }
+
+      7% {
+        -webkit-transform: rotate(-32deg);
+        transform: rotate(-32deg);
+      }
+
+      9% {
+        -webkit-transform: rotate(30deg);
+        transform: rotate(30deg);
+      }
+
+      11% {
+        -webkit-transform: rotate(-28deg);
+        transform: rotate(-28deg);
+      }
+
+      13% {
+        -webkit-transform: rotate(26deg);
+        transform: rotate(26deg);
+      }
+
+      15% {
+        -webkit-transform: rotate(-24deg);
+        transform: rotate(-24deg);
+      }
+
+      17% {
+        -webkit-transform: rotate(22deg);
+        transform: rotate(22deg);
+      }
+
+      19% {
+        -webkit-transform: rotate(-20deg);
+        transform: rotate(-20deg);
+      }
+
+      21% {
+        -webkit-transform: rotate(18deg);
+        transform: rotate(18deg);
+      }
+
+      23% {
+        -webkit-transform: rotate(-16deg);
+        transform: rotate(-16deg);
+      }
+
+      25% {
+        -webkit-transform: rotate(14deg);
+        transform: rotate(14deg);
+      }
+
+      27% {
+        -webkit-transform: rotate(-12deg);
+        transform: rotate(-12deg);
+      }
+
+      29% {
+        -webkit-transform: rotate(10deg);
+        transform: rotate(10deg);
+      }
+
+      31% {
+        -webkit-transform: rotate(-8deg);
+        transform: rotate(-8deg);
+      }
+
+      33% {
+        -webkit-transform: rotate(6deg);
+        transform: rotate(6deg);
+      }
+
+      35% {
+        -webkit-transform: rotate(-4deg);
+        transform: rotate(-4deg);
+      }
+
+      37% {
+        -webkit-transform: rotate(2deg);
+        transform: rotate(2deg);
+      }
+
+      39% {
+        -webkit-transform: rotate(-1deg);
+        transform: rotate(-1deg);
+      }
+
+      41% {
+        -webkit-transform: rotate(1deg);
+        transform: rotate(1deg);
+      }
+
+      43% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+      }
+
+      100% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+        fill: #f00;
+      }
+    }
+    </style>
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4">#i18n{suggest.message.empty_suggest}</h1>
-      <p class="lead">...</p>
+      <div class="ftco-animate fadeInUp ftco-animated mr-auto ml-auto">
+        <h2 class="text-center">
+            <svg id="icon-notification" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28">
+              <path d="M20.52 15.21l-1.8-1.81V8.94a6.86 6.86 0 0 0-5.82-6.88 6.74 6.74 0 0 0-7.62 6.67v4.67l-1.8 1.81A1.64 1.64 0 0 0 4.64 18H8v.34A3.84 3.84 0 0 0 12 22a3.84 3.84 0 0 0 4-3.66V18h3.36a1.64 1.64 0 0 0 1.16-2.79zM14 18.34A1.88 1.88 0 0 1 12 20a1.88 1.88 0 0 1-2-1.66V18h4zM5.51 16l1.18-1.18a2 2 0 0 0 .59-1.42V8.73A4.73 4.73 0 0 1 8.9 5.17 4.67 4.67 0 0 1 12.64 4a4.86 4.86 0 0 1 4.08 4.9v4.5a2 2 0 0 0 .58 1.42L18.49 16z" />
+            </svg>
+            <br>
+            #i18n{suggest.message.empty_suggest}
+        </h2>
+      </div>
     </div>
   </div>
 </#if>
 
 <#if list_suggest_submit?has_content>
-  <div class="row">
-    <#if paginator?exists>
-      <div class="col-xs-12 col-sm-6">
-        <!-- #i18n{suggest.suggestListSubmit.paginator.labelResultsCount} :  -->
-        #i18n{suggest.suggestListSubmit.paginator.labelResultsRange} :
-        <strong>${paginator.rangeMin} - ${paginator.rangeMax} / ${paginator.itemsCount}</strong>
-      </div>
-      <div class="col-xs-12 col-sm-6 text-right">
-        <@pagination paginator=paginator />
-      </div>
-    </#if>
+  <#if paginator?exists>
+  <div class="d-flex justify-content-center mt-1">
+    <div class="block-27">
+      <ul>
+        <@paginationSuggestDemo paginator=paginator />
+      </ul>
+    </div>
   </div>
+  <div class="d-flex justify-content-end mt-1">
+    <p class="py-2">
+      #i18n{suggest.suggestListSubmit.paginator.labelResultsCount} : <span class="badge badge-primary">${paginator.rangeMin} - ${paginator.rangeMax} / ${paginator.itemsCount}</span>
+    </p>
+  </div> 
+  </#if>
 </#if>
 
 <script>
@@ -185,3 +454,68 @@ $( function () {
     
 });
 </script>
+
+<#macro paginationSuggestDemo paginator >
+<#local nbLinkPagesToDisplay = 10 />
+<#local offsetPrev = nbLinkPagesToDisplay / 2 />
+<#local offsetNext = nbLinkPagesToDisplay / 2 />
+<#if ( paginator.pageCurrent <= nbLinkPagesToDisplay - offsetPrev )>
+	<#local offsetPrev = paginator.pageCurrent - 1 />
+	<#local offsetNext = nbLinkPagesToDisplay - offsetPrev />
+<#elseif ( paginator.pageCurrent + offsetNext > paginator.pagesCount )>
+	<#local offsetNext = paginator.pagesCount - paginator.pageCurrent />
+	<#local offsetPrev = nbLinkPagesToDisplay - offsetNext />
+</#if>
+
+<#if ( paginator.pagesCount > 1 )>
+  <#if ( paginator.pageCurrent - offsetPrev > 1 )>
+    <li>
+      <a href="${paginator.firstPageLink?xhtml}" title="#i18n{portal.util.labelFirst}">
+        <i class="fa fa-angle-double-left"></i>
+      </a>
+    </li>
+	</#if>
+  <#if ( paginator.pageCurrent > 1 )>
+    <li>
+      <a href="${paginator.previousPageLink?xhtml}" title="#i18n{portal.util.labelPrevious}">
+        <i class="fa fa-angle-left"></i>
+      </a>
+    </li>
+	</#if>
+  <#if ( paginator.pageCurrent - offsetPrev > 1 )>
+    <li>
+      <span>...</span>
+    </li>
+	</#if>
+	<#list paginator.pagesLinks as link>
+    <#if link.index == paginator.pageCurrent>
+      <li class="active">
+        <span>${link.name}</span>
+      </li>
+    <#else>
+      <li>
+        <a href="${link.url?xhtml}">${link.name}</a>
+      </li>
+		</#if>
+	</#list>
+	<#if ( paginator.pageCurrent + offsetNext < paginator.pagesCount )>
+    <li>
+      <span>...</span>
+    </li>
+	</#if>
+  <#if ( paginator.pageCurrent < paginator.pagesCount )>
+    <li>
+      <a href="${paginator.nextPageLink?xhtml}" title="#i18n{portal.util.labelNext}">
+        <i class="fa fa-angle-right"></i> 
+		  </a>
+    </li>
+    <#if ( paginator.pageCurrent + offsetNext < paginator.pagesCount )>
+      <li>
+        <a href="${paginator.lastPageLink?xhtml}" title="#i18n{portal.util.labelLast}">
+          <i class="fa fa-angle-double-right"></i> 
+        </a>
+      </li>
+		</#if>
+	</#if>
+</#if>
+</#macro>

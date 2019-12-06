@@ -52,11 +52,16 @@
 			<p class="meta">
 				<span class="icon-calendar"></span> ${suggest_submit.dateResponse}
 			</p>
-			<#if  authorized_vote && !suggest_submit.disableVote && suggest_submit.numberScore?exists>
-			<p class="meta">
-				<span class="icon-trophy"></span> <span class="suggest-score">#i18n{suggest.manageSuggestSubmit.rowNumberScore} ${suggest_submit.numberScore}</span></p>
-			</p>
-			</#if>
+			<#if authorized_vote && !suggest_submit.disableVote && suggest_submit.numberScore?exists>
+				<p class="meta">
+					<span class="icon-heart"></span> <span class="suggest-score" title="#i18n{suggest.manageSuggestSubmit.rowNumberScore} ">${suggest_submit.numberScore}</span></p>
+				</p>
+		        <p class="meta">
+                    <#if suggest_submit_vote_type?exists>
+                		${suggest_submit_vote_type}
+                    </#if>
+                </p>
+            </#if>
 		</div>
 	</div>
 	<#if isExtendInstalled?? && isExtendInstalled >
@@ -67,24 +72,24 @@
 	</#if>
 	
 	<#if authorized_comment && !suggest_submit.disableComment>
-		<hr>
 		<#if list_comment?has_content>
 			<div class="pt-3">
-				<h3 class="mb-5 font-weight-bold"><#if suggest_submit.numberCommentEnable==1>1 #i18n{suggest.suggestListSubmit.labelComment}<#else>${suggest_submit.numberCommentEnable} #i18n{suggest.suggestListSubmit.labelComments}</#if></h3>
+				<h3 class="mb-5 font-weight-bold">
+					<#if suggest_submit.numberCommentEnable==1>1 #i18n{suggest.suggestListSubmit.labelComment}<#else>${suggest_submit.numberCommentEnable} #i18n{suggest.suggestListSubmit.labelComments}</#if>
+				</h3>
 				<ul class="comment-list">
 					${list_comment}
 				</ul>
 			</div>	
 		</#if>
-		<hr>
-		<h2><#if suggest_submit.numberCommentEnable==0>Pas de commentaires<#elseif suggest_submit.numberCommentEnable==1>Commentaire<#else>Commentaires <small>(${suggest_submit.numberCommentEnable} )</small></#if></h2>
+		<!-- <h2><#if suggest_submit.numberCommentEnable==0><#elseif suggest_submit.numberCommentEnable==1>Commentaire<#else>Commentaires <small>(${suggest_submit.numberCommentEnable} )</small></#if> -->
 		<form class="form" action="jsp/site/Portal.jsp?page=suggest" method="post" name="form-comment" id="form-comment">
 			<input name="action" value="do_create_comment" type="hidden">
 			<input name="id_suggest" value="${id_suggest}" type="hidden">
 			<input name="id_suggest_submit" value="${suggest_submit.idSuggestSubmit}" type="hidden">
 			<div class="form-group">
-				<label for="comment_value" class="sr-only">#i18n{suggest.suggestComment.labelAddNewComment}</label>
-				<textarea name="comment_value" id="comment_value" class="markitup form-control" rows="2" placeholder="#i18n{suggest.suggestComment.labelAddNewComment}"></textarea>
+				<label for="comment_value">#i18n{suggest.suggestComment.labelAddNewComment}</label>
+				<textarea name="comment_value" id="comment_value" class="markitup form-control" rows="2"></textarea>
 			</div>
 			<#if jcaptcha?exists>
 				<div class="form-group">
