@@ -35,7 +35,7 @@
         </div>
       <#else>
         <div id="proposal" class="ftco-animate">
-          <a class="btn btn-lg btn-primary" href="jsp/site/Portal.jsp?page=suggest&id_suggest=${id_suggest}&action=create_suggest_submit" target="_top">
+          <a class="btn btn-lg btn-primary btn-cta" href="jsp/site/Portal.jsp?page=suggest&id_suggest=${id_suggest}&action=create_suggest_submit" target="_top">
             <i class="fas fa-plus"></i> #i18n{suggest.suggestFrame.labelProposal}
           </a>
         </div>     
@@ -45,16 +45,18 @@
         @ExtenderParameter[${id_suggest},SUGGEST_SUGGEST_TYPE,opengraph]@
       </#if>
       <section class="row">
-        <div class="col-xs-6 col-sm-8 ftco-animate">
+        <div class="col-xs-6 col-sm-8">
           ${content_suggest}
         </div>
         <div class="col-xs-6 col-sm-4 sidebar ftco-animate">
           <div class="sidebar-box ftco-animate"> 
             <a class="sr-only">#i18n{suggest.suggestFrame.buttonSorter}</a>
             <#if id_suggest_submit_sort?string==""><#assign id_suggest_submit_sort="1"></#if>
-            <select id="sort-select" class="custom-select">
+            <select id="sort-select" class="custom-select custom-select-lg ">
               <#list list_suggest_submit_sort as item >
-                <option value="${item.code}" <#if item.code=id_suggest_submit_sort?string>selected</#if>>#i18n{suggest.suggestFrame.buttonSorter} <#if item.name?trim !="" >${item.name} </#if></option>
+                <#if item.name?trim !="">
+                  <option value="${item.code}" <#if item.code=id_suggest_submit_sort?string>selected</#if>>#i18n{suggest.suggestFrame.buttonSorter} ${item.name!}</option>
+                </#if> 
               </#list>
             </select>
           </div>        

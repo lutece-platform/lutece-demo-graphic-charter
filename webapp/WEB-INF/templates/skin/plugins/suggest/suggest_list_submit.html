@@ -78,23 +78,23 @@
                 <#assign nbComments = 1>
                 <#if suggest_submit_display.suggest_submit.numberCommentEnable &gt; 0 >
                   <hr>
-                  <div class="suggest-list-comments">
-                    <#if suggest_submit_display.suggest_submit.numberCommentEnable &gt; 1 >
-                      <#assign lblComment>#i18n{suggest.suggestListSubmit.labelPreviewForPlural} ${suggest_submit_display.suggest_submit.numberCommentEnable} #i18n{suggest.suggestListSubmit.labelComments}</#assign>
-                    <#else>
-                      <#assign lblComment>#i18n{suggest.suggestListSubmit.labelPreviewForSingle} #i18n{suggest.suggestListSubmit.labelComment}</#assign>
-                    </#if>
-                    <h5>${i18n( "suggest.suggestListSubmit.labelPreviewComments", lblComment)}</h5>
-                    <ul class="list-unstyled">
-                      <#list suggest_submit_display.suggest_submit.comments as comment>
-                      <#if nbComments <= number_comments>
+                  <#assign postcomment='' />
+                  <#if suggest_submit_display.suggest_submit.numberCommentEnable &gt; 1 >
+                    <#assign labelComment>#i18n{suggest.suggestListSubmit.labelPreviewForPlural} ${suggest_submit_display.suggest_submit.numberCommentEnable} </#assign>
+                    <#assign postcomment='s' />
+                  <#else>
+                    <#assign labelComment>#i18n{suggest.suggestListSubmit.labelPreviewForSingle}</#assign>
+                  </#if>
+                  <h5>${i18n( "suggest.suggestListSubmit.labelPreviewComments", labelComment, postcomment)}</h5>
+                  <ul class="list-unstyled">
+                  <#list suggest_submit_display.suggest_submit.comments as comment>
+                    <#if nbComments <= number_comments>
                       <li>
                         <i class="far fa-comment"></i> <#if comment.value?length <= cumber_char_comments>${comment.value[0..]}<#else>${comment.value[0..cumber_char_comments-1]}...</#if>
                       </li>
-                      </#if>
-                      </#list>
-                    </ul>
-                  </div>
+                    </#if>
+                  </#list>
+                  </ul>
                 </#if>
               </#if>
               <hr>

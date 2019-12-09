@@ -2,29 +2,29 @@
 	<h1 class="mb-3">
 		<#if suggest_submit.suggestSubmitTitle?length &gt;65>${suggest_submit.suggestSubmitTitle?substring(0,60)}... <#else> ${suggest_submit.suggestSubmitTitle} </#if>
 	</h1>
-	<p class="text-right">
-	<#if lutece_user_connected??>
-		<#if user_subscribed?? && user_subscribed>
-			<a class="btn btn-danger btn-sm" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit.idSuggestSubmit}&amp;action=unsubscribe_suggest#suggest${suggest_submit.idSuggestSubmit}" title="#i18n{suggest.manageSuggestSubmit.unsubscribe}">
-				<i class="fas fa-bookmark"></i> #i18n{suggest.manageSuggestSubmit.unsubscribe}
-			</a>
-		<#else>
-			<a class="btn btn-primary btn-sm" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit.idSuggestSubmit}&amp;action=subscribe_suggest#suggest${suggest_submit.idSuggestSubmit}" title="#i18n{suggest.manageSuggestSubmit.subscribe}">
-				<i class="far fa-bookmark"></i> #i18n{suggest.manageSuggestSubmit.subscribe}
-			</a>
-		</#if>
-	</#if>
-	<#if enable_suggest_reports>
-		<a class="btn btn-primary btn-sm" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit.idSuggestSubmit}&amp;action=create_report#suggest${suggest_submit.idSuggestSubmit}">
-			<i class="fa fa-flag"></i> #i18n{suggest.suggestListSubmit.labelReport}
-		</a>
-	</#if>
-	</p>
 	<#if suggest_submit.suggestSubmitValue?exists>
 		<div class="suggest-list-content">
 			${suggest_submit.suggestSubmitValue}
 		</div>
 	</#if>
+	<p class="text-center">
+		<#if lutece_user_connected??>
+			<#if user_subscribed?? && user_subscribed>
+				<a class="btn btn-danger btn-sm" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit.idSuggestSubmit}&amp;action=unsubscribe_suggest#suggest${suggest_submit.idSuggestSubmit}" title="#i18n{suggest.manageSuggestSubmit.unsubscribe}">
+					<i class="fas fa-bookmark"></i> #i18n{suggest.manageSuggestSubmit.unsubscribe}
+				</a>
+			<#else>
+				<a class="btn btn-primary btn-sm" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit.idSuggestSubmit}&amp;action=subscribe_suggest#suggest${suggest_submit.idSuggestSubmit}" title="#i18n{suggest.manageSuggestSubmit.subscribe}">
+					<i class="far fa-bookmark"></i> #i18n{suggest.manageSuggestSubmit.subscribe}
+				</a>
+			</#if>
+		</#if>
+		<#if enable_suggest_reports>
+			<a class="btn btn-primary btn-sm" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit.idSuggestSubmit}&amp;action=create_report#suggest${suggest_submit.idSuggestSubmit}">
+				<i class="fa fa-flag"></i> #i18n{suggest.suggestListSubmit.labelReport}
+			</a>
+		</#if>
+	</p>
 	<div class="about-author d-flex p-5 bg-light">
 		<div class="bio mr-5">
 		<#if suggest_submit.lutece_user?exists>
@@ -65,10 +65,10 @@
 		</div>
 	</div>
 	<#if isExtendInstalled?? && isExtendInstalled >
-		<h4 class="suggest-socials">#i18n{suggest.suggestDetail.labelShare}
+		<p class="suggest-socials">#i18n{suggest.suggestDetail.labelShare}
 			@Extender[${suggest_submit.idSuggestSubmit},SUGGEST_SUGGEST_SUBMIT_TYPE,opengraph,{header:false,footer:false}]@
 			@ExtenderParameter[${suggest_submit.idSuggestSubmit},SUGGEST_SUGGEST_SUBMIT_TYPE,opengraph]@
-		</h4>
+		</p>
 	</#if>
 	
 	<#if authorized_comment && !suggest_submit.disableComment>
