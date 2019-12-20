@@ -1,7 +1,7 @@
 <div class="form-group">
 	<div class="custom-file">
-		<input name="${entry.idEntry}" id="${entry.idEntry}" type="file" class="custom-file-input" value="">
-		<label class="custom-file-label" for="${entry.idEntry}" data-browse="#i18n{suggest.modifySuggestSubmitType.labelDownloadImageFile}">${entry.title}<#if entry.mandatory> *</#if></label>
+		<input name="${entry.idEntry}" id="customFile${entry.idEntry}" type="file" class="custom-file-input">#i18n{suggest.modifySuggestSubmitType.labelDownloadImageFile}
+		<label class="custom-file-label" for="customFile${entry.idEntry}" data-browse="#i18n{suggest.suggestsubmit.add.image}<#if entry.mandatory> *</#if>"></label>
 	</div>
 	<#if entry.helpMessage?exists&&entry.helpMessage!=''>
 	<span class="help-text">${entry.helpMessage}</span>

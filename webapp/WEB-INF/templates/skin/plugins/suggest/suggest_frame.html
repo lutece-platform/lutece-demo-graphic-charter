@@ -50,12 +50,12 @@
         </div>
         <div class="col-xs-6 col-sm-4 sidebar ftco-animate">
           <div class="sidebar-box ftco-animate"> 
-            <a class="sr-only">#i18n{suggest.suggestFrame.buttonSorter}</a>
+            <label class="sr-only" id="button-sort" for="sort-select">#i18n{suggest.suggestFrame.buttonSorter}</label>
             <#if id_suggest_submit_sort?string==""><#assign id_suggest_submit_sort="1"></#if>
-            <select id="sort-select" class="custom-select custom-select-lg ">
+            <select id="sort-select" class="custom-select custom-select-lg " title="#i18n{suggest.suggestFrame.buttonSorter} "  aria-label="#i18n{suggest.suggestFrame.buttonSorter}" aria-describedby="button-sort">
               <#list list_suggest_submit_sort as item >
                 <#if item.name?trim !="">
-                  <option value="${item.code}" <#if item.code=id_suggest_submit_sort?string>selected</#if>>#i18n{suggest.suggestFrame.buttonSorter} ${item.name!}</option>
+                  <option value="${item.code}" <#if item.code=id_suggest_submit_sort?string>selected</#if>>${item.name!}</option>
                 </#if> 
               </#list>
             </select>
@@ -67,9 +67,11 @@
               <input type="hidden" name="page" value="search">
               <div class="form-group">
                 <div class="icon">
-                  <span class="icon-search"></span>
+                  <button class="btn btn-link text-dark text-decoration-none" type="submit" id="button-search">
+                    <span class="icon-search" style="margin-right:-30px"></span>
+                  </button>
                 </div>
-                <input type="text" class="form-control" name="query" id="query" placeholder="#i18n{suggest.suggestFrame.altSearch}" value="<#if query?exists>${query}</#if>">
+                <input type="text" class="form-control" name="query" id="query" placeholder="#i18n{suggest.suggestFrame.altSearch}" value="<#if query?exists>${query}</#if>" aria-label="#i18n{suggest.suggestFrame.altSearch}" aria-describedby="button-search">
               </div>
             </form>   
           </div>

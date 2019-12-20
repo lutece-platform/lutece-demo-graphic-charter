@@ -22,7 +22,13 @@
             <div class="text d-flex py-4">
               <div class="mb-3">
                 <p class="meta">
-                  <a href="#"><#if suggest_submit_display.lutece_user?exists><#if suggest_submit_display.lutece_user?exists>${suggest_submit_display.lutece_user!""}<#else>${suggest_submit_display.lutece_user.getUserInfo("user.name.given")} ${suggest_submit_display.lutece_user.getUserInfo("user.name.family")}</#if></#if></a>
+                  <a href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&lutece_user_name_filter=${suggest_submit_display.lutece_user!}">
+                    <#if suggest_submit_display.lutece_user?exists>
+                      ${suggest_submit_display.lutece_user!""}
+                    <#else>
+                      ${suggest_submit_display.lutece_user.getUserInfo("user.name.given")} ${suggest_submit_display.lutece_user.getUserInfo("user.name.family")}
+                    </#if>
+                  </a>
                 </p>
                 <p class="meta">
                   <span class="icon-calendar"></span> ${suggest_submit_display.suggest_submit.dateResponse}
@@ -54,11 +60,11 @@
                 <a class="heading text-dark" href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&amp;id_suggest_submit=${suggest_submit_display.suggest_submit.idSuggestSubmit}&amp;action=view_suggest_submit#suggest${suggest_submit_display.suggest_submit.idSuggestSubmit}">
                   <h5>${suggest_submit_display.suggest_submit.suggestSubmitTitle}</h5>
                   <#if suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList?exists>
-                  <#if suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList?length &gt; 500>
-                  ${suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList}
-                  <#else>
-                  ${suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList}
-                  </#if>
+                    <#if suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList?length &gt; 500>
+                      ${suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList}
+                    <#else>
+                      ${suggest_submit_display.suggest_submit.suggestSubmitValueShowInTheList}
+                    </#if>
                   </#if>
                 </a>
                 <p class="text-gray mb-3">

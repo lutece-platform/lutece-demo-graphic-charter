@@ -1,0 +1,6 @@
+<#if response.valueResponse?has_content>
+	<#if is_title?exists && is_title><#else></#if>	
+	<#if response.idImageResource?has_content>
+		<img class="rounded mx-auto d-block" src="image?resource_type=image_suggest&id=${response.idImageResource}" <#if response.entry.width!=-1> width="${response.entry.width}"</#if><#if response.entry.height!=-1>height="${response.entry.height}" </#if> alt="">
+	</#if>
+</#if>

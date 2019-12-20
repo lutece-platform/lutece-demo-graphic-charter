@@ -42,8 +42,11 @@
 									<input type="hidden" name="${key}" value="${list_parameters[key]}">
 									</#list>
 									</#if>														
-									<button type="submit"class="btn btn-lg btn-primary btn-lg">
-										<i class="fas fa-ok"></i> #i18n{portal.util.labelValidate}
+									<button type="submit"class="btn btn-lg btn-success btn-lg">
+										<i class="fas fa-check"></i> #i18n{portal.util.labelValidate}
+									</button>
+									<button type="button" class="btn btn-danger btn-lg ml-2" onclick="javascript:window.history.back();">
+										<i class="fa fa-times-circle"></i> #i18n{portal.util.labelCancel}
 									</button>
 								</form>	
 							</#if>

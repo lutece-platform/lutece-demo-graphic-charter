@@ -1,26 +1,28 @@
 <div class="row">
 	<div class="col">
-        <div class="container">
+        <div class="container p-5">
         	<#if unavailability_message?exists>
 				<div class="alert alert-warning">
 					${unavailability_message}
 				</div>    
 			<#else>
-				<h3>#i18n{suggest.suggestList.title}:</h3> 
-				<#if paginator?exists>
-					#i18n{suggest.suggestListSubmit.paginator.labelResultsCount} : <strong>${paginator.itemsCount}</strong> <br />
-					#i18n{suggest.suggestListSubmit.paginator.labelResultsRange} : <strong>${paginator.rangeMin} - ${paginator.rangeMax}</strong> <br />
-					<@pagination paginator=paginator />
-				</#if>
-				<ul clas="list-unstyled"> 
 				<#if list_suggest?exists>
+					<div class="card-columns">
 					<#list list_suggest as suggest>	
-						<li>
-							<a href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${suggest.idSuggest}&amp;action=view_suggest_submit_list">${suggest.title}</a>
-						</li>
+						<div class="card mb-3">
+							<a href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${suggest.idSuggest}&amp;action=view_suggest_submit_list&amp;id_suggest_submit_sort=1">
+								<img src="image?resource_type=image_suggest&id=${suggest.idImageResource}" class="card-img-top" alt="...">
+								<div class="card-body">
+									<h5 class="card-title">${suggest.title}</h5>
+									<p class="card-text">${suggest.description!}</p>
+									<p class="card-text"><small class="text-muted">${suggest.dateCreation!}</small></p>
+								</div>
+							</a>
+						</div> 
 					</#list>
+					</div>
 				</#if>
-				</ul>
+				
 			</#if>
         </div>
 	</div>
