@@ -23,10 +23,10 @@
               <div class="mb-3">
                 <p class="meta">
                   <a href="jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${id_suggest}&lutece_user_name_filter=${suggest_submit_display.lutece_user!}">
-                    <#if suggest_submit_display.lutece_user?exists>
-                      ${suggest_submit_display.lutece_user!""}
-                    <#else>
+                    <#if suggest_submit_display.lutece_user??>
                       ${suggest_submit_display.lutece_user.getUserInfo("user.name.given")} ${suggest_submit_display.lutece_user.getUserInfo("user.name.family")}
+                    <#else>
+                      ${suggest_submit_display.lutece_user!""}
                     </#if>
                   </a>
                 </p>
